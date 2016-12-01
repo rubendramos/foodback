@@ -1,0 +1,17 @@
+<h2>Component {{component.key}}</h2>   
+<div class="container">
+  <form   [formGroup]="form">
+    <div *ngFor="let element of elements" class="form-row">
+      <app-dynamic-group-form [field]="element" [form]="form"></app-dynamic-group-form>
+    </div>
+
+    <div *ngFor="let action of actions" class="form-row">
+    	<!-- <button type="submit" [value]="action.label" [disabled]="!form.valid">{{action.label}}</button> -->
+    	  <button (click)="onSubmit(action.key)" [disabled]="!form.valid">{{action.label}}</button>  		  
+    </div>
+  </form>
+  <div *ngIf="payLoad" class="form-row">
+    <strong>Handle the following values</strong><br>{{payLoad}}
+  </div>
+    </div>
+  

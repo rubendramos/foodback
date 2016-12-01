@@ -1,0 +1,6 @@
+ <div>
+      <h2>Page {{page.title}}</h2>   
+      <div *ngFor="let component of page.getComponents()" >   
+      	<dynamic-form [component]="component"></dynamic-form>
+      </div>
+ </div>

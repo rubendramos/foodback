@@ -1,0 +1,10 @@
+<h2>Childs</h2>
+<ul class="child">
+  <li *ngFor="let child of childs"
+    [class.selected]="child === selectedChild"
+    (click)="onClick(child)">
+    <span class="badge">{{child.id}}</span> {{child.name}}
+  </li>
+</ul>
+
+<app-child-detail [child]="selectedChild"></app-child-detail>
