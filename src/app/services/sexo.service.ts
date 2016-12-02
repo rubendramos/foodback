@@ -2,31 +2,31 @@ import { Injectable } from '@angular/core';
 import { Sexo } from '../interfaces/sexo.interface';
 import { SEXOS } from '../model/mock-sexo';
 import { Option } from '../model/option';
-import { SexoForm } from '../model/sexoForm';
 
-import { DropdownField } from '../formularios/fields/dropdown-field';
-import { BasicField } from '../formularios/fields/basic-field';
-import { TextboxField } from '../formularios/fields/textbox-field';
-import { DateField } from '../formularios/fields/Date-field';
-import { IntegerField } from '../formularios/fields/integer-field';
-import { ActionInterface } from '../formularios/fields/action.interface';
-import { BasicAction } from '../formularios/fields/basic-action';
-
-import { ComponentInterface } from '../formularios/fields/component.interface';
-import { ElementInterface } from '../formularios/fields/element.interface';
-import {BasicComponent} from '../formularios/fields/basic-component';
-import {ValidationInterface} from '../formularios/fields/validations/validation.interface';
-import {FactoryValidation} from '../formularios/fields/validations/factory-validation';
+import {FormInterface} from '../formulario/form/form.interface';
+import {FieldInterface} from '../formulario/elements-form/field/field.interface';
+import {BasicField} from '../formulario/elements-form/field/basic-field';
+import {BasicForm} from '../formulario/form/basic-form';
 
 
+import { DropdownField } from '../formulario/elements-form/field/dropdown-field';
+import { TextboxField } from '../formulario/elements-form/field/textbox-field';
+import { DateField } from '../formulario/elements-form/field/Date-field';
+import { IntegerField } from '../formulario/elements-form/field/integer-field';
+
+import { ComponentInterface } from '../formulario/elements-form/component/component.interface';
+import { ActionInterface } from '../formulario/elements-form/action/action.interface';
+import { BasicAction } from '../formulario/elements-form/action/basic-action';
+import {BasicComponent} from '../formulario/elements-form/component/basic-component';
+import {FactoryFieldValidation} from '../formulario/elements-form/field/field-validation/factory-field-validation';
 
 
 @Injectable()
 export class SexoService {
 
 sexos : Sexo[] ;
-fkElement: ElementInterface;
-elements: ElementInterface[];
+fkElement: FieldInterface;
+elements: FieldInterface[];
 actions : ActionInterface[];  
 
 component : ComponentInterface;
@@ -47,19 +47,19 @@ component : ComponentInterface;
          return options;
   }
 
-getElements(): ElementInterface[] {
+getElements(): FieldInterface[] {
     this.elements = [new TextboxField( {
                             key: 'name',
                             label: 'Nome',
                             value: '',
-                            validations: [FactoryValidation.getRequiredValidation(),FactoryValidation.getMinLengthValidation(5), FactoryValidation.getPatternValidation('123')],
+                            validations: [FactoryFieldValidation.getRequiredValidation(),FactoryFieldValidation.getMinLengthValidation(5), FactoryFieldValidation.getRequiredPatternValidation('/^1/')],
                             order: 2
                             }),
                             new IntegerField( {
                             key: 'id',
                             label: 'ID',
                             type: 'integer',
-                            validations: [FactoryValidation.getRequiredValidation(),FactoryValidation.getMinLengthValidation(5), FactoryValidation.getMaxLengthValidation(5)],
+                            validations: [FactoryFieldValidation.getRequiredValidation(),FactoryFieldValidation.getForbiddenPatternValidation('/^bob/')],
                             required: true,
                             order: 1
                             })
@@ -68,7 +68,7 @@ getElements(): ElementInterface[] {
         return this.elements.sort(( a, b ) => a.order - b.order )
     }
 
-getFkElement(): ElementInterface {
+getFkElement(): FieldInterface {
     return this.fkElement =  new DropdownField({
     key: 'Sex',
     label: 'Sexo',

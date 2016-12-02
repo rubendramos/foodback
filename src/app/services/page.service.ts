@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BasicPage } from '../formularios/fields/basic-page';
-import { ComponentInterface } from '../formularios/fields/component.interface';
+import { BasicForm } from '../formulario/form/basic-form';
+import { ComponentInterface } from '../formulario/elements-form/component/component.interface';
 
 @Injectable()
 export class PageService {
 
-basicPage: BasicPage = new BasicPage('title', [],[]);
+basicPage: BasicForm = new BasicForm('title', [],[]);
 components : ComponentInterface[] = [];
 
-    constructor(basicPage : BasicPage) {
+    constructor(basicPage : BasicForm) {
         this.basicPage = basicPage;
     }
 
-    getPage(): BasicPage {
-        return new BasicPage('Novo',[],[]);
+    getPage(): BasicForm {
+        return new BasicForm('Novo',[],[]);
     }
     
 

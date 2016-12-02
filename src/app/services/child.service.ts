@@ -1,33 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Child } from '../model/child';
 import { CHILDS } from '../model/mock-childs';
-import { ChildForm } from '../model/childForm';
 import { Inject } from '@angular/core';
 
 
-import { DropdownField } from '../formularios/fields/dropdown-field';
-import { BasicField } from '../formularios/fields/basic-field';
-import { TextboxField } from '../formularios/fields/textbox-field';
-import { DateField } from '../formularios/fields/Date-field';
-import { IntegerField } from '../formularios/fields/integer-field';
+import {FormInterface} from '../formulario/form/form.interface';
+import {FieldInterface} from '../formulario/elements-form/field/field.interface';
+import {BasicField} from '../formulario/elements-form/field/basic-field';
+import {BasicForm} from '../formulario/form/basic-form';
 
-import { ComponentInterface } from '../formularios/fields/component.interface';
-import { ElementInterface } from '../formularios/fields/element.interface';
-import { ActionInterface } from '../formularios/fields/action.interface';
-import { BasicAction } from '../formularios/fields/basic-action';
+
+import { DropdownField } from '../formulario/elements-form/field/dropdown-field';
+import { TextboxField } from '../formulario/elements-form/field/textbox-field';
+import { DateField } from '../formulario/elements-form/field/Date-field';
+import { IntegerField } from '../formulario/elements-form/field/integer-field';
+
+import { ComponentInterface } from '../formulario/elements-form/component/component.interface';
+import { ActionInterface } from '../formulario/elements-form/action/action.interface';
+import { BasicAction } from '../formulario/elements-form/action/basic-action';
 import { SexoService } from './sexo.service';
-import {BasicComponent} from '../formularios/fields/basic-component';
-import {FactoryValidation} from '../formularios/fields/validations/factory-validation';
+import {BasicComponent} from '../formulario/elements-form/component/basic-component';
+import {FactoryFieldValidation} from '../formulario/elements-form/field/field-validation/factory-field-validation';
+
 @Injectable()
 export class ChildService {
 
 
 childs: Child[];
-elements : ElementInterface[] = [];
-fkElements : ElementInterface[] ;
+elements : FieldInterface[] = [];
+fkElements : FieldInterface[] ;
 actions : ActionInterface[] = [];
 component : ComponentInterface;
-fkSexo : ElementInterface;
+fkSexo : FieldInterface;
 
     constructor(sexoService : SexoService) {
         this.childs = CHILDS;    
@@ -38,31 +42,28 @@ fkSexo : ElementInterface;
         return this.childs;
     }
 
-    getChildForm(): ChildForm{
-        return new ChildForm();
-    }
     
-    getElements(): ElementInterface[] {
+    getElements(): FieldInterface[] {
        this.elements = [
                                new TextboxField( {
                                    key: 'name',
                                    label: 'Nome',
                                    value: '',
-                                   validations: [FactoryValidation.getRequiredValidation(),FactoryValidation.getMinLengthValidation(2)],
+                                   validations: [FactoryFieldValidation.getRequiredValidation(),FactoryFieldValidation.getMinLengthValidation(2)],
                                    order: 2
                                }),
                                new TextboxField( {
                                    key: 'surname',
                                    label: 'Apelido',
                                    value: '',
-                                   validations: [FactoryValidation.getRequiredValidation(),FactoryValidation.getMaxLengthValidation(5)],
+                                   validations: [FactoryFieldValidation.getRequiredValidation(),FactoryFieldValidation.getMaxLengthValidation(5)],
                                    order: 3
                                }),
                                new DateField( {
                                    key: 'birthday',
                                    label: 'Data Nemento',
                                    type: 'date',
-                                   validations: [FactoryValidation.getRequiredValidation(),FactoryValidation.getMaxLengthValidation(10),FactoryValidation.getMinLengthValidation(10)],
+                                   validations: [FactoryFieldValidation.getRequiredValidation(),FactoryFieldValidation.getMaxLengthValidation(10),FactoryFieldValidation.getMinLengthValidation(10)],
                                    order: 4
                                }, 'fullDate' ),
 
@@ -70,7 +71,7 @@ fkSexo : ElementInterface;
                                    key: 'id',
                                    label: 'ID',
                                    type: 'integer',
-                                   validations: [FactoryValidation.getRequiredValidation()],
+                                   validations: [FactoryFieldValidation.getRequiredValidation()],
                                    order: 1
                                }), this.fkSexo
                            ];
@@ -78,7 +79,7 @@ fkSexo : ElementInterface;
        
     }
 
-    getFkComponent(): ElementInterface[] {
+    getFkComponent(): FieldInterface[] {
         return this.fkElements;
     } 
     

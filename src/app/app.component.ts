@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ChildService } from './services/child.service';
 import { SexoService } from './services/sexo.service';
 import { PageService } from './services/page.service';
-import { BasicPage } from './formularios/fields/basic-page';
+import { BasicForm } from './formulario/form/basic-form';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { BasicPage } from './formularios/fields/basic-page';
 })
 
 export class AppComponent {
-  page : BasicPage = new BasicPage('Proba1',[],[]);
+  page : BasicForm = new BasicForm('Proba1',[],[]);
   constructor(childService: ChildService, sexoService : SexoService) {
   
   this.page.addComponent(childService.getComponent());  
