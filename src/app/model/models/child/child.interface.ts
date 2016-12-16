@@ -1,11 +1,10 @@
-import {Sexo} from './sexo.interface';
-import {Address} from './address.interface';
+import {SexoInterface} from '../sexo/sexo.interface';
+import {AddressInterface} from '../address/address.interface';
 
-export interface Child {
+export interface ChildInterface {
   id : number;
   name : string;
   surname : string;
   birthday : string;
-  sex : Sexo;
-  address : Address;
+  sexo : SexoInterface;
 }

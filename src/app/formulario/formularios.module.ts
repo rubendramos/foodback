@@ -8,6 +8,7 @@ import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { DynamicGroupFormComponent } from './dynamic-group-form/dynamic-group-form.component';
 import { FormulariosComponent } from './formularios.component';
 
+import { TranslateModule }   from '../translate';
 
 
 
@@ -15,12 +16,13 @@ import { FormulariosComponent } from './formularios.component';
     declarations: [
       DynamicFormComponent,
       DynamicGroupFormComponent,FormulariosComponent],
-    imports: [
+      imports: [
       CommonModule,
       HttpModule,
-      ReactiveFormsModule],
+      ReactiveFormsModule,
+      TranslateModule],
       exports: [FormulariosComponent],
-    providers: [],
+      providers: [],
     
   })
 export class FormulariosModule { }

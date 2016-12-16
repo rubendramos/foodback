@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BasicForm } from './form/basic-form';
+import { FormInterface } from './form/form.interface';
 import { BasicComponent } from './elements-form/component/basic-component';
 import { ComponentInterface } from './elements-form/component/component.interface';
+
+
 @Component({
   selector: 'app-formularios',
   templateUrl: './formularios.component.html',
@@ -9,14 +12,20 @@ import { ComponentInterface } from './elements-form/component/component.interfac
 })
 export class FormulariosComponent implements OnInit {
    
-    @Input() page: BasicForm;
+    @Input() form: FormInterface;
     components : ComponentInterface[];
-constructor() {    
     
+   
+    
+constructor() {    
+    this.form;
 }
 
+  
   ngOnInit() {
-      this.components = this.page.getComponents();
-  }
+      this.components = this.form.getComponents();
+    }   
+  
+ 
 
 }

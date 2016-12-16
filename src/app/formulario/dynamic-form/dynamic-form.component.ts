@@ -29,5 +29,10 @@ export class DynamicFormComponent implements OnInit {
   onSubmit(action : string) {      
       this.payLoad =  action + '--' + JSON.stringify(this.form.value) ;
   }
+  
+  isCurrentAction( action: string ) {
+      return true;
+  }
+  
 }
 

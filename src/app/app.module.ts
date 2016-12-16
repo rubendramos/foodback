@@ -2,27 +2,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AppComponent } from './app.component';
+
+
+
+import { TRANSLATION_PROVIDERS, TranslateService,TranslateModule }   from './translate';
+import { TranslateComponent } from './translate/translate.component';
 import { FormulariosModule } from './formulario/formularios.module';
 
-import { AppComponent } from './app.component';
-import { ChildDetailComponent } from './child-detail/child-detail.component';
-import { ChildListComponent } from './child-list/child-list.component';
+import { PagesModule } from './pages/pages.module';
+import { PagesService } from './pages/pages.service';
+import { PagesInterface } from './pages/pages.interface';
 
-import { SexoService } from './services/sexo.service';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChildDetailComponent,
-    ChildListComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    ReactiveFormsModule,
-    FormulariosModule],
-  providers: [],
+  declarations: [AppComponent],
+  imports: [BrowserModule,HttpModule,ReactiveFormsModule,TranslateModule, PagesModule, FormulariosModule],
+  providers: [TRANSLATION_PROVIDERS, TranslateService, PagesService ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

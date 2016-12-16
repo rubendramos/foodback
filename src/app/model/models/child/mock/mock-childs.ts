@@ -1,10 +1,10 @@
-import {Child} from './child';
-import {Sexo} from './sexo';
+import {ChildInterface} from '../child.interface';
+import {Sexo} from '../../sexo/sexo';
 
 
 
 
-export const CHILDS: Child[] = [
-  {id: 1, name: 'Lois', birthday : '25/03/2014', sexo : new Sexo(1,'Neno')},
-  {id: 2, name: 'Simon',birthday : '23/01/2010', sexo : new Sexo(2,'Nena')}
+export const CHILDS: ChildInterface[] = [
+  {id: 1, name: 'Lois', surname:'díaz', birthday : '25/03/2014', sexo : new Sexo(1,'Neno')},
+  {id: 2, name: 'Simon',surname:'díaz',birthday : '23/01/2010', sexo : new Sexo(2,'Nena')}
 ];

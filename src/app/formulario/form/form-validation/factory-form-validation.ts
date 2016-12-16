@@ -16,7 +16,7 @@ export class FactoryFieldValidation {
        return new BasicValidation({
                 key: 'required',
                 name :'required',
-                message :'e un campo obligatorio',
+                message :'is a mandatory field',
                 validator: Validators.required,
                 order:1    
         });

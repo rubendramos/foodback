@@ -1,4 +1,5 @@
-export class Sexo  {
+import {SexoInterface} from './sexo.interface';
+export class Sexo implements SexoInterface {
   id : number;
   name : string;
 

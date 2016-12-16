@@ -7,6 +7,7 @@ export interface FieldValidationInterface {
     name: string;
     validator : FieldValidatorInterface<any>;
     message : string;
+    param : string;
     order : number;
 
 

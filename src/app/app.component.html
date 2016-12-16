@@ -1,4 +1,13 @@
+ <div class="page">
+
+
  <div>
-      <h2>{{page.title}}</h2>
-      <app-formularios [page]="page"></app-formularios>
+      <h2><strong>{{page.title | translate }}</strong></h2>
+	  <app-translate [supportedLanguages]="supportedLanguages" [_translate]="_translate"></app-translate>
+      <app-formularios [form]="page.getPageForm()"></app-formularios>
  </div>
+ </div>
+ 
+ 
+ 
+ 

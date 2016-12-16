@@ -1,22 +1,41 @@
-import { Component } from '@angular/core';
-import { ChildService } from './services/child.service';
-import { SexoService } from './services/sexo.service';
-import { PageService } from './services/page.service';
-import { BasicForm } from './formulario/form/basic-form';
+import { Component, OnInit } from '@angular/core';
+
+import { PagesService } from './pages/pages.service';
+import { PagesInterface } from './pages/pages.interface';
+import { TranslateService }   from './translate';
 
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers:  [ChildService, SexoService, PageService]
+
+@Component( {
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
+    
 })
 
 export class AppComponent {
-  page : BasicForm = new BasicForm('Proba1',[],[]);
-  constructor(childService: ChildService, sexoService : SexoService) {
   
-  this.page.addComponent(childService.getComponent());  
-  this.page.addComponent(sexoService.getComponent()); 
-  }
+public page : PagesInterface;
+public translatedText: string;
+public supportedLanguages: any[];
+public _translate : TranslateService;
+
+
+    constructor(private pagesService : PagesService, private translate :TranslateService ) {
+
+        this.page = pagesService.getPage();
+        this._translate = translate;
+        this.supportedLanguages = [
+                                   { display: 'English', value: 'en' },
+                                   { display: 'Español', value: 'es' },
+                                   { display: '华语', value: 'zh' },
+                                   { display: 'Galego', value: 'gl' },
+                               ];
+        
+           // set language
+           this._translate.setDefaultLang( 'gl' );
+           this._translate.enableFallback( true );
+           this._translate.use( 'es' );                               
+    }
+   
 }

@@ -14,7 +14,7 @@ export class FactoryFieldValidation {
        return new BasicValidation({
                 key: 'required',
                 name :'required',
-                message :'e un campo obligatorio',
+                message :'is a mandatory field',
                 validator: Validators.required,
                 order:1    
         });
@@ -29,8 +29,9 @@ export class FactoryFieldValidation {
        return new BasicValidation({
                 key: 'maxlength',
                 name :'maxLength',
-                message :'so poder '+ maxValue + ' caracteres ' ,
+                message :'only allows n caracters' ,
                 validator: Validators.maxLength(maxValue),
+                param : maxValue.toString(),
                 order:1    
         });
         
@@ -41,8 +42,9 @@ export class FactoryFieldValidation {
         return new BasicValidation({
                  key: 'minlength',
                  name :'minLength',
-                 message :'ten que ter '+ minValue + ' caracteres como mínimo' ,
+                 message :'n caracteres mandatory' ,
                  validator: Validators.minLength(minValue),
+                 param : minValue.toString(),
                  order:1    
          });
          
@@ -53,10 +55,11 @@ export class FactoryFieldValidation {
     
    
         return new BasicValidation({
-                 key: 'forbiddenNameValidator',
+                 key: 'forbiddenPatternValidator',
                  name :'pattern',
-                 message :'Non pode conter o patrón '+ pattern ,
-                 validator: PatternValidator.forbiddenNameValidator(nameRe),
+                 message :'x forbidden Pattern' ,
+                 validator: PatternValidator.forbiddenPatternValidator(pattern),
+                 param : pattern,
                  order:1    
          });
          
@@ -66,9 +69,45 @@ export class FactoryFieldValidation {
         let nameRe = new RegExp (pattern);
         return new BasicValidation({
                  key: 'requiredStartPatternValidator',
+                 name :'requiredStartPatternValidator',
+                 message :'must be began for x pattern',
+                 validator: PatternValidator.requiredStartPatternValidator(pattern),
+                 param : pattern,
+                 order:1    
+         });
+         
+     }   
+    
+    
+    static getOnlyIntegerValidation() : FieldValidationInterface{        
+        return new BasicValidation({
+                 key: 'onlyIntegerValidator',
+                 name :'onlyIntegerValidator',
+                 message :'must to be an integer' ,
+                 validator: PatternValidator.onlyIntegerValidator(),
+                 order:1    
+         });
+         
+     }    
+    
+    
+    static getOnlyAlphaNumericValidation() : FieldValidationInterface{        
+        return new BasicValidation({
+                 key: 'onlyAlphaNumericValidator',
+                 name :'onlyAlphaNumericValidator',
+                 message :'only allows alphanumeric A to Z' ,
+                 validator: PatternValidator.onlyAlphaNumericValidator(),
+                 order:1    
+         });
+         
+     }      
+    
+    static getForbiddenCaracteresValidation(pattern : string) : FieldValidationInterface{        
+        return new BasicValidation({
+                 key: 'forbiddenCaractersValidator',
                  name :'pattern',
-                 message :'ten que comenzar polo  patron '+ pattern ,
-                 validator: PatternValidator.requiredStartPatternValidator,
+                 message :'Os caracteres ' + pattern + ' non esta permitidos' ,
+                 validator: PatternValidator.forbiddenCaractersValidator(pattern),
                  order:1    
          });
          

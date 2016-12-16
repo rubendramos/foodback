@@ -1,5 +1,5 @@
-<div [formGroup]="form" >
-  <label [attr.for]="field.key">{{field.label}}</label>
+<div [formGroup]="form">
+  <label [attr.for]="field.key">{{field.label | translate}}</label>
   <div [ngSwitch]="field.controlType">
     <input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.controlType" class="form-control">
     <select [id]="field.key" *ngSwitchCase="'dropdown'"[formControlName]="field.key" class="form-control">
@@ -10,6 +10,6 @@
   </div> 
 
   <div *ngFor="let validation of validations" class="form-row">
-	<div *ngIf="form.controls[field.key].hasError(validation.key)" class="alert alert-danger">{{field.label}}  {{validation.message}}</div>
+	<div *ngIf="form.controls[field.key].hasError(validation.key)" class="alert alert-danger">{{field.label | translate}}  {{validation.message | translate:[validation.param]}}</div>
   </div>
 </div>

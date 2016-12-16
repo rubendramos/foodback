@@ -6,12 +6,14 @@ export class BasicValidation implements FieldValidationInterface{
   name: string;
   validator : FieldValidatorInterface<any>;
   message : string;
+  param : string  
   order: number;
   constructor(options: {     
       key?: string,
       name?: string,
       validator? : FieldValidatorInterface<any>,
       message? : string,
+      param? : string,
       order?: number
     } = {}) {
  
@@ -19,6 +21,7 @@ export class BasicValidation implements FieldValidationInterface{
     this.name = options.name || '';    
     this.validator = options.validator;
     this.message = options.message || '';
+    this.param = options.param||'';
     this.order = options.order === undefined ? 1 : options.order;
    
   }

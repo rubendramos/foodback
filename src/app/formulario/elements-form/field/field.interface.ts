@@ -6,9 +6,12 @@ export interface FieldInterface {
     label: string;
     validations: FieldValidationInterface[];
     order: number;
+    maxLength : number;
+    minLength : number;    
     controlType: string; 
     
     setOrder(order: number);
     setValidations(validations : FieldValidationInterface[]);
+    getDefaultValidations(): FieldValidationInterface[];
        
 }
