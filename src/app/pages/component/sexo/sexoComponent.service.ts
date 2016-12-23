@@ -8,6 +8,7 @@ import {BasicForm} from '../../../formulario/form/basic-form';
 
 
 import { DropdownField } from '../../../formulario/elements-form/field/dropdown-field';
+import { MultiSelectDropdownField } from '../../../formulario/elements-form/field/multiselect-dropdown-field';
 import { TextboxField } from '../../../formulario/elements-form/field/textbox-field';
 import { DateField } from '../../../formulario/elements-form/field/Date-field';
 import { IntegerField } from '../../../formulario/elements-form/field/integer-field';
@@ -17,6 +18,7 @@ import { ActionInterface } from '../../../formulario/elements-form/action/action
 import { BasicAction } from '../../../formulario/elements-form/action/basic-action';
 import {BasicComponent} from '../../../formulario/elements-form/component/basic-component';
 import {FactoryFieldValidation} from '../../../formulario/elements-form/field/field-validation/factory-field-validation';
+import {IMultiSelectSettings,IMultiSelectTexts} from '../../../multiselectDropdown/multiselect-dropdown';
 
 import { ModelService} from '../../../model/model.service';
 import { SexoInterface} from '../../../model/models/sexo/sexo.interface';
@@ -59,21 +61,36 @@ getElements(): FieldInterface[] {
                             required: true,
                             maxLength : 5,
                             order: 1
-                            })
+                            }), this.getFkElement2()
                             ];
      
         return this.elements.sort(( a, b ) => a.order - b.order )
     }
 
 getFkElement(): FieldInterface {
-    return this.fkElement =  new DropdownField({
-    key: 'Sex',
+    return this.fkElement =  new MultiSelectDropdownField({
+    key: 'sexo',
     label: 'Sexo',
     options: this.getOptions(),
+    validations: [FactoryFieldValidation.getRequiredValidation('multiselect-dropdown')],
     required: true,
     order : 4
   }); ;
 }
+
+getFkElement2(): FieldInterface {
+    
+    return this.fkElement =  new MultiSelectDropdownField({
+    key: 'sexo2',
+    label: 'Nenos',
+    options: this.getOptions(),
+    validations: [FactoryFieldValidation.getRequiredValidation('multiselect-dropdown')],
+    required: true,
+    order : 4
+  }); 
+}
+
+
 
 getActions() : ActionInterface[]{
         this.actions = [new BasicAction({key:'save', label:'save', order:3, controlType:'componente'}),

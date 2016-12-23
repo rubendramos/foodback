@@ -1,6 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 import { ValidatorFn } from '@angular/forms';
+import { MultiSelectDropdownField} from '../multiselect-dropdown-field'; 
 
 
 export class PatternValidator {

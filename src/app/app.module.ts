@@ -3,6 +3,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { MultiselectDropdownModule } from './multiselectDropdown/multiselect-dropdown';
+
 
 
 
@@ -18,7 +20,7 @@ import { PagesInterface } from './pages/pages.interface';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,HttpModule,ReactiveFormsModule,TranslateModule, PagesModule, FormulariosModule],
+  imports: [BrowserModule,HttpModule,ReactiveFormsModule,TranslateModule, PagesModule, FormulariosModule, MultiselectDropdownModule],
   providers: [TRANSLATION_PROVIDERS, TranslateService, PagesService ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,15 +1,39 @@
-<div [formGroup]="form">
-  <label [attr.for]="field.key">{{field.label | translate}}</label>
-  <div [ngSwitch]="field.controlType">
-    <input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.controlType" class="form-control">
-    <select [id]="field.key" *ngSwitchCase="'dropdown'"[formControlName]="field.key" class="form-control">
-      <option *ngFor="let opt of field.options"  [value]="opt.key" class="form-control">{{opt.value}} </option>
-    </select>    
-    <input *ngSwitchCase="'date'" [id]="field.key"  [type]="field.controlType" class="form-control" [formControlName]="field.key" >
-    <input *ngSwitchCase="'integer'" [id]="field.key"  [type]="field.controlType" class="form-control" [formControlName]="field.key">
-  </div> 
+<div [formGroup]="form">	
 
-  <div *ngFor="let validation of validations" class="form-row">
-	<div *ngIf="form.controls[field.key].hasError(validation.key)" class="alert alert-danger">{{field.label | translate}}  {{validation.message | translate:[validation.param]}}</div>
-  </div>
+	<!-- component Lavel -->
+	<label [attr.for]="field.key">{{field.label | translate}}</label>
+
+	<div [ngSwitch]="field.controlType">	
+	
+		<!--text component  -->
+		<input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.controlType" class="form-control">
+				
+			
+		<!--dropdow component  -->		
+		<select [id]="field.key" *ngSwitchCase="'dropdown'"	[formControlName]="field.key" class="form-control">
+			<option *ngFor="let opt of field.options" [value]="opt.key"		class="form-control">{{opt.value}}</option>
+		</select>
+			
+	
+		<!--Multiselect dropdwon component  -->
+		<ss-multiselect-dropdown *ngSwitchCase="'multiselect-dropdown'" formControlName={{field.key}} [label]="field.label" [texts]="field.texts" [settings]="field.settings"  [options]="field.options" ></ss-multiselect-dropdown>		
+	
+	
+		<!--Date component  -->	
+		<input *ngSwitchCase="'date'" [id]="field.key"	[type]="field.controlType" class="form-control"	[formControlName]="field.key"> 
+			
+			
+		<!--Input component  -->		
+		<input	*ngSwitchCase="'integer'" [id]="field.key" [type]="field.controlType"	class="form-control" [formControlName]="field.key">
+	
+	</div>
+
+	<!-- Validation messages  -->
+	<div *ngFor="let validation of validations" class="form-row">
+		<div *ngIf="form.controls[field.key].hasError(validation.key)"
+			class="alert alert-danger">{{field.label | translate}}
+			{{validation.message | translate:[validation.param]}}
+		</div>
+	</div>
+
 </div>

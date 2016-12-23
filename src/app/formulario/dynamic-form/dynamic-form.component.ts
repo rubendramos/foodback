@@ -1,5 +1,5 @@
 import { Component, Input, OnInit }  from '@angular/core';
-import { FormGroup,AbstractControl }                 from '@angular/forms';
+import { FormGroup,AbstractControl,FormsModule  }                 from '@angular/forms';
 import { ControlFieldService }    from '../elements-form/field/control-field.service';
 import {FieldInterface} from '../elements-form/field/field.interface';
 import {FieldValidationInterface} from '../elements-form/field/field-validation/field-validation.interface';

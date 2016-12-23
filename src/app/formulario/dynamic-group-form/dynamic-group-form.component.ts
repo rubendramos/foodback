@@ -1,7 +1,8 @@
 import { Component, Input , OnInit } from '@angular/core';
-import { FormGroup }        from '@angular/forms';
+import { FormGroup, FormControl }        from '@angular/forms';
 import {FieldInterface} from '../elements-form/field/field.interface';
 import {FieldValidationInterface} from '../elements-form/field/field-validation/field-validation.interface';
+import { ControlFieldService }    from '../elements-form/field/control-field.service';
 
 
 @Component({
@@ -13,14 +14,17 @@ export class DynamicGroupFormComponent implements OnInit {
 
     @Input() field: FieldInterface;
     @Input() form: FormGroup;
+    
+    
     validations: FieldValidationInterface [];    
     
-    constructor(){
+    constructor(private cfs: ControlFieldService){
        
     };
     
     ngOnInit(){
         this.validations = this.field.validations;    
+        
     }
-    get isValid() { return this.form.controls[this.field.key].valid; }
+    get isValid() { return this.form.controls[this.field.key].valid}
   }

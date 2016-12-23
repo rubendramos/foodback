@@ -3,25 +3,58 @@ import {BasicValidation} from './basic-field-validation';
 import {FieldValidatorInterface} from '../field-validators/field-validator.interface';
 import { Validators} from '@angular/forms';
 import {PatternValidator} from '../field-validators/pattern-validator';
-
+import {MultiSelectValidator} from '../field-validators/multiselect-validator';
 
 export class FactoryFieldValidation {
   
     type : string;
     
-    static getRequiredValidation() : FieldValidationInterface{
+    static getRequiredValidation(type? : string) : FieldValidationInterface{
         
-       return new BasicValidation({
+       let validation : FieldValidationInterface;
+     
+        if(type == "multiselect-dropdown"){            
+            validation= this.oneChoiceRequiredValidation(type);
+        }else {
+            validation = new BasicValidation({
                 key: 'required',
                 name :'required',
                 message :'is a mandatory field',
                 validator: Validators.required,
                 order:1    
-        });
+            });
+        }
+       return validation;
         
     }
     
-
+    static oneChoiceRequiredValidation(type? : string) : FieldValidationInterface{
+        
+        let validation : FieldValidationInterface;
+      
+         if(type=="multiselect-dropdown"){
+             
+             validation=new BasicValidation({
+                 key: 'oneChoiceRequiredValidator',
+                 name :'oneChoiceRequiredValidator',
+                 message :'is a mandatory field',
+                 validator: MultiSelectValidator.oneChoiceRequiredValidator(),
+                 order:1    
+             });
+         }else {
+             validation = new BasicValidation({
+                 key: 'required',
+                 name :'required',
+                 message :'is a mandatory field',
+                 validator: Validators.required,
+                 order:1    
+             });
+         }
+        return validation;
+         
+     }
+    
+    
     
     
     static getMaxLengthValidation(maxValue : number) : FieldValidationInterface{

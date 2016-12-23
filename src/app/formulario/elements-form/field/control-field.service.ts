@@ -2,6 +2,7 @@ import { Injectable }   from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {FieldInterface} from './field.interface';
 import {FieldValidatorInterface} from './field-validators/field-validator.interface';
+import {MultiSelectDropdownField} from './multiselect-dropdown-field';
 
 
 
@@ -17,13 +18,29 @@ export class ControlFieldService {
   /**
    * Engadimos cada elemento do compoñente ao formgroup cos correspondentes validators.
    */
+  
+  
+  
   toFormGroup(fields: FieldInterface[] ) {
       let group: any = {};
      
 
       fields.forEach(field => {
       let validators :  FieldValidatorInterface<any>[] = []; 
-          
+         
+      
+
+      
+    if(field.controlType == 'multiselect-dropdown'){ 
+        //field.value = null;
+        validators = this.getFieldValidators(field);
+        group[field.key] = new FormControl(field.value || '', validators) 
+        return this.fb.group(group);
+  
+    }
+      
+      
+      
       if(this.notEmpty(field.validations)){    
           validators = this.getFieldValidators(field);
       
@@ -38,8 +55,12 @@ export class ControlFieldService {
       }
       
       });
+      
       return this.fb.group(group);
     }  
+  
+  
+
   
   /**
    * Recollemos os validadores para pasalos ao formGroup
